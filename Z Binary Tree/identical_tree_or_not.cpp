@@ -44,7 +44,7 @@ bool isSameTrees(node* p, node* q) {
 
         if(p->data != q->data) return false;
         return isSameTrees(p -> left , q -> left) && isSameTrees(p -> right, q -> right);
-    }
+}
 int main(){
     node*p = BuildTree();
     node*q = BuildTree();

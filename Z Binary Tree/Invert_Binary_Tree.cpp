@@ -25,3 +25,21 @@ node* BuildTree(){
 
     return root;
 }
+node* invertTree(node* root) {
+    if(root == NULL) return 0;
+    // root node(current root)
+    swap(root -> left, root -> right);
+    invertTree(root -> left);
+    invertTree(root -> right);
+    return root;
+}
+
+void print(node* root)
+
+int main(){
+    node* root = BuildTree();
+    root = invertTree(root);
+
+
+    return 0;
+}
