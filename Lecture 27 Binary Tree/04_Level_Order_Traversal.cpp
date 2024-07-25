@@ -12,39 +12,35 @@ class node{
                 this->right=NULL;
             }
 };
-node*BuildTreeLevelOrder(){
-    cout<<"Enter root node data : "<<endl;
+node* BulidTreeLevelOrder( ){
+    queue<node*> q;
+    cout<<"Enter data for root : ";
     int data;
     cin>>data;
-    if(data == -1) return NULL;
     node* root = new node(data);
-
-    queue<node*> q;
     q.push(root);
-    
-    
-    while(!q.empty()){
-        node* f = q.front();
-        q.pop();
-        int leftdata, rightdata;
-        cout<<"Enter left Node Data : "<<endl;
-        cin>>leftdata;
 
+    while(!q.empty()){
+        node* temp = q.front();
+        q.pop();
+
+        cout<<"enter data for left node : "<<temp ->data<<endl;
+        int leftdata;
+        cin>>leftdata;
         if(leftdata != -1){
-            node* leftnode = new node(leftdata);
-            f->left = leftnode;
+            temp -> left = new node(leftdata);
+            q.push(temp -> left);
         }
 
-        cout<<"Enter Right Node data : "<<endl;
-        cin>>rightdata;
-        
+        cout<<"enter data for Right node : "<<temp ->data<<endl;
+        int rightdata;
+        cin>>rightdata; 
         if(rightdata != -1){
-            node* rightnode = new node(rightdata);
-            f->right = rightnode;
-            q.push(rightnode);
+            temp -> left = new node(rightdata);
+            q.push(temp -> left);
+        }
     }
 }
-
 // create root node
 // push into q
 // access teh front node form q
@@ -52,3 +48,43 @@ node*BuildTreeLevelOrder(){
 // make left node & right node
 // connect them to front node
 // push them into q
+
+void PrintLevelOrder(node* root){
+    queue<node*>q;
+    q.push(root);
+    while(!q.empty()){
+        int size = q.size();
+        while(size--){
+            node* f = q.front();
+            q.pop();
+            cout<<f->data<<" ";
+            if(f -> left)  q.push(f -> left);
+            if(f -> right) q.push(f -> right);
+        }
+        cout<<endl;
+    }
+}
+
+// vector<vector<int>> leveltraversal(TreeNode* root){
+//         vector<vector<int>> result;
+//         if(root == NULL) return result;
+//         queue<TreeNode*> q;
+//         q.push(root);
+
+//         while(!q.empty()){
+//             vector<int> ans;
+//             int size = q.size();
+//             while(size--){
+//                 TreeNode* f = q.front();
+//                 q.pop();
+//                 if(f->left) q.push(f->left);
+//                 if(f->right) q.push(f->right);
+//                 ans.push_back(f->val);
+//             }
+//             result.push_back(ans);
+//         }
+//         return result;
+//     }
+//     vector<vector<int>> levelOrder(TreeNode* root) {
+//         return leveltraversal(root);
+//     }
