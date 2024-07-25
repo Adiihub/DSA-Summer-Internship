@@ -13,99 +13,70 @@ class node{
             }
 };
 
-node*BuildTree(){
-    int data;
-    cin>>data;
-
-    // root node ko banane ka kaam mera h
-    node* root = new node(data);
-
-    // data == -1 (Base case)
-    if(data == -1){
-        return NULL;
-    }
-
-    // recursion Left subtree ko bana kr de dega
-    root->left=BuildTree();
-
-    // recursion Right subtree ko bana kr de dega
-    root->right=BuildTree();
-
-    return root;
-}
-
-void leverlOrderTraversal(node* root){
+void PrintLevelOrder(node* root){
     queue<node*>q;
     q.push(root);
-    q.push(NULL);
 
     while(!q.empty()){
         node* temp = q.front();
         q.pop();
 
         if(temp == NULL){
-            cout<<endl;
             if(!q.empty()){
                 q.push(NULL);
             }
         }
         else{
             cout<<temp->data<<" ";
-            if(temp -> left){
-            q.push(temp -> left);
-            }
-            if(temp -> right){
-                q.push(temp -> right);
-            }
+            if(temp -> left)  q.push(temp -> left);
+            if(temp -> right) q.push(temp -> right);
         }
     }
 }
 
 node* BulidfromLevelOrder( ){
-    queue<node*> q;
     cout<<"Enter data for root : ";
     int data;
     cin>>data;
+    if(data == -1){
+        return NULL;
+    }
     node* root = new node(data);
+
+    queue<node*> q;
     q.push(root);
 
     while(!q.empty()){
         node* temp = q.front();
         q.pop();
 
-        cout<<"enter data for left node : "<<temp ->data<<endl;
         int leftdata;
+        cout<<"enter left node data of : "<<temp ->data<<endl;
         cin>>leftdata;
+
         if(leftdata != -1){
-            temp -> left = new node(leftdata);
-            q.push(temp -> left);
+            node* leftNode= new node(leftdata);
+            temp -> left = leftNode;
+            q.push(leftNode);
         }
 
-        cout<<"enter data for Right node : "<<temp ->data<<endl;
         int rightdata;
+        cout<<"enter data for Right node : "<<temp ->data<<endl;
         cin>>rightdata; 
         if(rightdata != -1){
-            temp -> left = new node(rightdata);
-            q.push(temp -> left);
+            node* rightNode = new node(rightdata);
+            temp -> right = rightNode;
+            q.push(rightNode);
         }
     }
-}
-
-void  print(node* root){
-    if(!root){
-        return;
-    }
-    cout<<root->data<<" ";
-    print(root->left);
-    print(root->right);
 }
 
 int main(){
 
-    node*root=BuildTree();
+    node*root=BulidfromLevelOrder();
     // print(root);
     cout<<"Printing the level Order traversal : "<<endl;
-    leverlOrderTraversal(root);
+    PrintLevelOrder(root);
     
     return 0;
 }

@@ -1,4 +1,5 @@
 #include<bits/stdc++.h>
+#include<queue>
 using namespace std;
 
 class TreeNode {
@@ -13,6 +14,33 @@ class TreeNode {
         right = NULL;
     } 
 };
+
+TreeNode* BuildTree(){
+    int data;
+    cout<<"enter root node : ";
+    cin>>data;
+    TreeNode* root = new TreeNode(data);
+
+    queue<TreeNode*> q;
+    q.push(root);
+    while(!q.empty()) {
+        TreeNode* temp = q.front();
+        q.pop();
+        cout<<"Enter Left child node for "<<temp->val<<" : ";
+        cin>>data;
+        if(data != -1){
+            temp->left = new TreeNode(data);
+            q.push(temp->left);
+        }
+        cout<<"Enter Right child node for "<<temp->val<<" : ";
+        cin>>data;
+        if(data != -1){
+            temp->right = new TreeNode(data);
+            q.push(temp->right);
+        }
+    }
+    return root;
+}
  
 class Solution {
 public:
@@ -32,14 +60,10 @@ public:
 
 int main(){
     Solution s;
-    TreeNode *root = new TreeNode(1);
-    root -> left = new TreeNode(NULL);
-    root -> right = new TreeNode(2);
-    root -> right -> left = new TreeNode(3);
-    // root -> right -> right = new TreeNode(nullptr);
+    TreeNode* root = BuildTree();
 
     vector<int> ans;
-    ans = s.inorderTraversal(root);
+    ans = s.postorderTraversal(root);
     for(int i = 0; i < ans.size(); i++){
         cout << ans[i] << " ";
         }
