@@ -52,7 +52,7 @@ void preOrder(node* root){
 void InOrder(node* root){
     if(!root) return;
     InOrder(root->left);
-    cout<<root->data<<" ";
+    cout<<root->data<<" "; // INOrder hamesha shorted order me hi print krta hai
     InOrder(root->right);
 }
 
@@ -62,6 +62,20 @@ void postOrder(node* root){
     postOrder(root->right);
     cout<<root->data<<" ";
 }
+void printAtoB(node* root, int a, int b) {
+    if (!root) return;
+
+    if (root->data > a) {
+        printAtoB(root->left, a, b);
+    }
+
+    if (root->data >= a && root->data <= b) {
+        cout << root->data << " ";
+    }
+    if (root->data < b) {
+        printAtoB(root->right, a, b);
+    }
+}
 
 int main(){
     node* root = createBST();
@@ -69,13 +83,17 @@ int main(){
     preOrder(root);
     cout<<endl;
 
-    cout<<"In Order"<<endl;
-    InOrder(root);
-    cout<<endl;
+    int a, b;
+    cin>>a>>b;
+    printAtoB(root, a,b);
+
+    // cout<<"In Order"<<endl;
+    // InOrder(root);
+    // cout<<endl;
     
-    cout<<"Post Order"<<endl;
-    postOrder(root);
-    cout<<endl;
+    // cout<<"Post Order"<<endl;
+    // postOrder(root);
+    // cout<<endl;
   
     return 0;
 }
