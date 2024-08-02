@@ -39,6 +39,25 @@ int main(){
     mymap.erase("abc");
     cout<<mymap.count("abc")<<endl;
 
+    // Iterator
+    // Unorderd_map<string, int> :: Iterator it = my.begin();
+    // it = my.begin();
+    
+    auto it = mymap.begin();
+    cout<<"key : Value"<<endl;
+    cout<<"-----------"<<endl;
+    for(auto it1 = it; it1!=mymap.end(); it1++){
+        cout<<it1->first<<" : "<<it1->second<<endl;
+    }
+
+    for(auto it2 : mymap){
+        it2.second = 100;
+    }
+            // Here value of it2:second will not change cuz we are not passing the reference
+    for(auto it2 : mymap){
+        cout<<it2.first<<" "<<it2.second<<endl;
+    }
+
 
     return 0;
 }
