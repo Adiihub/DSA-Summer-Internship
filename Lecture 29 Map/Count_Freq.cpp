@@ -20,12 +20,12 @@ int main(){
     }
 
     // Find Out Max freq of data
-    int max = INT_MIN;
+    int maxfreq = INT_MIN;
     int val;
     for(auto it : mymap){
-        if(it.second > max){
+        if(it.second > maxfreq){
             val = it.first;
-            max = it.second;
+            maxfreq = it.second;
         }
     }
     cout<<"max freq : "<<val<<endl;
